@@ -13,5 +13,9 @@ public class Item {
 
     private Product product;
     private Integer quantity;
+
+    public Integer getTotal() {
+        return this.product.getPrice() * this.quantity;
+    }
     
 }

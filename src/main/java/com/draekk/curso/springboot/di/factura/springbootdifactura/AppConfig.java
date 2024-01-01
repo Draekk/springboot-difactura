@@ -11,7 +11,7 @@ import com.draekk.curso.springboot.di.factura.springbootdifactura.models.Item;
 import com.draekk.curso.springboot.di.factura.springbootdifactura.models.Product;
 
 @Configuration
-@PropertySource("classpath:data.properties")
+@PropertySource(value="classpath:data.properties", encoding = "UTF-8")
 public class AppConfig {
 
     @Bean("itemsInvoice")
