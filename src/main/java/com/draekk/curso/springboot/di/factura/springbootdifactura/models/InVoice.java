@@ -3,9 +3,12 @@ package com.draekk.curso.springboot.di.factura.springbootdifactura.models;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +24,24 @@ public class Invoice {
     private String description;
 
     @Autowired
+    @Qualifier("itemsInvoiceOffice")
     private List<Item> items;
+
+    public Invoice() {
+        System.out.println("Creando el componente de la factura desde el constructor");
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Creando el componente de la factura");
+        client.setName(client.getName().concat(" ").concat("'Draekk'"));
+        description = description.concat(" del cliente: ").concat(client.getName().concat(" ").concat(client.getLastname()));
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("Factura destruida. ".concat(description));
+    }
 
     public Integer getTotal() {
         /* 
